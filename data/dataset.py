@@ -1,7 +1,7 @@
 import numpy as np
 from tqdm import tqdm
 import h5py
-from util import cordinate_img
+from .util import cordinate_img
 
 class dataset(object):
     def __init__(self, args=None):
