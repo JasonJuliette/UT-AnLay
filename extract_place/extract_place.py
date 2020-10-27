@@ -5,9 +5,9 @@
 # @brief The main part of the extracting placement into image project
 #
 
-import parser
-import placement_ds as ds
-import geometry as geo
+import extract_place.parser
+import extract_place.placement_ds as ds
+import extract_place.geometry as geo
 
 import os 
 import glob
@@ -27,7 +27,7 @@ class Extractor(object):
         self._db = ds.Database()
         self._image_size = 64 # _image_size * _image_size outputs
     def parse(self, pfile, ffile, cfile, jfile, jchan=None):
-        parse = parser.Parser(self._db)
+        parse = extract_place.parser.Parser(self._db)
         parse.parse_dot_pin_file(pfile)
         parse.parse_place_result_final(ffile)
         parse.parse_connection(cfile)
@@ -50,8 +50,8 @@ class Extractor(object):
             yl_px = self._db.circuit().pixel_y(device.y_lo())
             xh_px = self._db.circuit().pixel_x(device.x_hi())
             yh_px = self._db.circuit().pixel_y(device.y_hi())
-            for x_px in range(xl_px, xh_px):
-                for y_px in range(yl_px, yh_px):
+            for x_px in range(int(xl_px), int(xh_px)):
+                for y_px in range(int(yl_px), int(yh_px)):
                     img[y_px][x_px] += 1 # Increment the value
         export_grayscale_image(img, self._image_size, filename)
     def export_device_channel_placement(self, device_channel, filename):
@@ -69,8 +69,8 @@ class Extractor(object):
             yl_px = self._db.circuit().pixel_y(device.y_lo())
             xh_px = self._db.circuit().pixel_x(device.x_hi())
             yh_px = self._db.circuit().pixel_y(device.y_hi())
-            for x_px in range(xl_px, xh_px):
-                for y_px in range(yl_px, yh_px):
+            for x_px in range(int(xl_px), int(xh_px)):
+                for y_px in range(int(yl_px), int(yh_px)):
                     img[y_px][x_px] = device.device_type() # Increment the value
         export_grayscale_image(img, self._image_size, filename)
     def export_connect_net_bbox(self, filename):
@@ -92,8 +92,8 @@ class Extractor(object):
             yl_px = self._db.circuit().pixel_y(bbox.y_lo())
             xh_px = self._db.circuit().pixel_x(bbox.x_hi())
             yh_px = self._db.circuit().pixel_y(bbox.y_hi())
-            for x_px in range(xl_px, xh_px):
-                for y_px in range(yl_px, yh_px):
+            for x_px in range(int(xl_px), int(xh_px)):
+                for y_px in range(int(yl_px), int(yh_px)):
                     img[y_px][x_px] += 1 # Increment the value
         export_grayscale_image(img, self._image_size, filename)
         

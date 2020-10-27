@@ -1,7 +1,9 @@
+#import extract_place
 from extract_place import extract_place
 from compress_dataset import compress
+import os, tarfile
 
-benchmark_dir = './benchmark/'
+benchmark_dir = './benchmark/'          #this is assuming that the benchmark dataset directory in not in a tar file
 path_to_json = './benchmark/JsonFile/'
 compressed_data = "./data/data.hdf5"
 

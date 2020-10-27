@@ -7,7 +7,7 @@
 
 import numpy as np
 import glob
-from scipy import misc
+import imageio
 from tqdm import tqdm
 import h5py
 
@@ -108,7 +108,7 @@ class compress(object):
             files.append(path + "/bias.png")
             # Read images
             for j, fileName in enumerate(files):
-                image[:,:,j] = misc.imread(fileName, flatten=True, mode="L") 
+                image[:,:,j] = imageio.imread(fileName, as_gray=True, pilmode="L") 
             self.images[index,:,:,:] = image
             index += 1
         assert index == N, "Read images not matched"
@@ -128,7 +128,7 @@ class compress(object):
         f = h5py.File(hdf5, 'a')
         name = self.name + '_' + self.label + '_' + str(self.balance)
         print("Dataset group", name)
-        grp = f.create_group(name)
+        grp = f.create_group(name)      #Unable to create group (name already exists) 
         dataset = grp.create_dataset("images", self.images.shape, h5py.h5t.STD_U8BE, data=self.images, compression="gzip")
         metaset = grp.create_dataset("meta", self.labels.shape, h5py.h5t.STD_U8BE, data=self.labels, compression="gzip")
         f.close()

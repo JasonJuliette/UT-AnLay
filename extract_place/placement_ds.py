@@ -1,11 +1,12 @@
 ##
+##
 # @file placement_ds.py
 # @author Keren Zhu
 # @date May 2019
 # @brief Data structure for reading the Magical placement results
 #
 
-import geometry as geo
+import extract_place.geometry as geo
 
 class Macro_pin(object):
     def __init__(self):
@@ -225,7 +226,7 @@ class Circuit(object):
         self._pins = []
         self._nets = []
         self._device_name_map = {}
-        self._img_size = 64 # the size of the images
+        self._img_size = 64 # the size of the imagesaaaaa
     def initialize(self):
         """
         @brief wrapper of the initialize functions

@@ -5,7 +5,7 @@
 # @brief Parser for extracting placement
 #
 
-import placement_ds as ds
+import extract_place.placement_ds as ds
 import json
 
 class Parser(object):
@@ -93,7 +93,7 @@ class Parser(object):
                 netname = words[0]
                 devices = []
                 pins = []
-                for pin_idx in range(0, (len(words) - 1) / 2):
+                for pin_idx in range(0, (len(words) - 1) // 2):
                     device_name = words[1 + pin_idx *2]
                     pin_name = words[1 + pin_idx*2 + 1]
                     if pin_name == "B" or pin_name == "BULK":

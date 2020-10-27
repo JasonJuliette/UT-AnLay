@@ -20,7 +20,7 @@ def nofeat_2D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
 def feat_2D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
     with tf.variable_scope("cnn"):
         conv1_temp = []
-        for i in range(input_ch/3):
+        for i in range(input_ch//3):
             conv1_temp.append(tf.layers.conv2d(x[:,:,:,3*i:3*i+3], 24, 5, padding='same', activation=tf.nn.relu, kernel_initializer=tf.keras.initializers.he_normal()))
         conv1 = tf.concat(conv1_temp,axis=3)
         conv2 = tf.layers.conv2d(conv1, 64, 5, padding='same',activation=tf.nn.relu)
@@ -55,7 +55,7 @@ def nofeat_3D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
 def feat_3D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
     with tf.variable_scope("cnn"):
         conv1_temp = []
-        for i in range(input_ch/3):
+        for i in range(input_ch//3):
             conv1_temp.append(tf.layers.conv2d(x[:,:,:,3*i:3*i+3], 128, 5, padding='same', activation=tf.nn.relu, kernel_initializer=tf.keras.initializers.he_normal()))
         conv1 = tf.stack(conv1_temp,axis=1)
         conv2 = tf.layers.conv3d(conv1, 64, (3,5,5), padding='same', activation=tf.nn.relu)

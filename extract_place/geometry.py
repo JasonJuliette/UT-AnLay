@@ -25,7 +25,7 @@ class XY(object):
         return string
 
 class Rect(object):
-    def __init__(self, x_lo = sys.maxint, y_lo = sys.maxint, x_hi = -sys.maxint - 1, y_hi = -sys.maxint - 1):
+    def __init__(self, x_lo = sys.maxsize, y_lo = sys.maxsize, x_hi = -sys.maxsize - 1, y_hi = -sys.maxsize - 1):
         self._ll = XY(x_lo, y_lo)
         self._ur = XY(x_hi, y_hi)
     def x_lo(self):
